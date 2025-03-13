@@ -24,13 +24,13 @@ jobs:
         run: |
           curl --silent --request GET \
             --url "https://api.getpostman.com/collections/be50e3ab-6abd-48bd-b6fc-696972b25333" \
-            --header "X-Api-Key: ${{ secrets.API_KEY }}" > postman_collection.json
+            --header "X-Api-Key: PMAK-67d3651b7dc2730001805eff-dfc938e9fff7540d831de3bec4259f0e63" > postman_collection.json
 
       - name: Descargar ambiente de Postman
         run: |
           curl --silent --request GET \
             --url "https://api.getpostman.com/environments/19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a" \
-            --header "X-Api-Key: ${{ secrets.API_KEY }}" > postman_environment.json
+            --header "X-Api-Key: PMAK-67d3651b7dc2730001805eff-dfc938e9fff7540d831de3bec4259f0e63" > postman_environment.json
 
       - name: Ejecutar pruebas de Smoke con Newman
         run: newman run postman_collection.json -e postman_environment.json --folder "Smoke Tests" --reporters cli,junit --reporter-junit-export results.xml
