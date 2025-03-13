@@ -21,7 +21,7 @@ jobs:
       - name: Descargar colección de Postman
         run: |
           curl --silent --request GET \
-            --url "https://api.getpostman.com/collections/be50e3ab-6abd-48bd-b6fc-696972b25333" \
+            --url "https://api.getpostman.com/collections/ada46968-73f0-4c27-ba1f-e5022ef1de1c" \
             --header "X-Api-Key: PMAK-67d3651b7dc2730001805eff-dfc938e9fff7540d831de3bec4259f0e63" > postman_collection.json
 
       - name: Descargar ambiente de Postman
