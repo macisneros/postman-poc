@@ -1,0 +1,42 @@
+name: Run Postman Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:  # Permite ejecutarlo manualmente desde GitHub
+
+jobs:
+  postman-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Instalar Newman
+        run: npm install -g newman
+
+      - name: Descargar colección de Postman
+        run: |
+          curl --silent --request GET \
+            --url "https://api.getpostman.com/collections/be50e3ab-6abd-48bd-b6fc-696972b25333" \
+            --header "X-Api-Key: ${{ secrets.API_KEY }}" > postman_collection.json
+
+      - name: Descargar ambiente de Postman
+        run: |
+          curl --silent --request GET \
+            --url "https://api.getpostman.com/environments/19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a" \
+            --header "X-Api-Key: ${{ secrets.API_KEY }}" > postman_environment.json
+
+      - name: Ejecutar pruebas de Smoke con Newman
+        run: newman run postman_collection.json -e postman_environment.json --folder "Smoke Tests" --reporters cli,junit --reporter-junit-export results.xml
+
+      - name: Publicar reporte de JUnit (opcional)
+        uses: actions/upload-artifact@v3
+        with:
+          name: postman-test-results
+          path: results.xml
