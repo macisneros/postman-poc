@@ -32,9 +32,3 @@ jobs:
 
       - name: Ejecutar pruebas de Smoke con Newman
         run: newman run postman_collection.json -e postman_environment.json --folder "Smoke Tests" --reporters cli,junit --reporter-junit-export results.xml
-
-      - name: Publicar reporte de JUnit (opcional)
-        uses: actions/upload-artifact@v3
-        with:
-          name: postman-test-results
-          path: results.xml
