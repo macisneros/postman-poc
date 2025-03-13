@@ -31,4 +31,4 @@ jobs:
             --header "X-Api-Key: PMAK-67d3651b7dc2730001805eff-dfc938e9fff7540d831de3bec4259f0e63" > postman_environment.json
 
       - name: Ejecutar pruebas de Smoke con Newman
-        run: newman run postman_collection.json -e postman_environment.json --folder "Smoke Tests" --reporters cli,junit --reporter-junit-export results.xml
+        run: newman run postman_collection.json -e postman_environment.json --reporters cli,junit --reporter-junit-export results.xml
