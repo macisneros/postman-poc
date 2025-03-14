@@ -33,16 +33,22 @@ jobs:
       - name: Autenticarse con Postman API
         run: postman login --with-api-key PMAK-67d3651b7dc2730001805eff-dfc938e9fff7540d831de3bec4259f0e63
 
-      - name: Ejecutar pruebas con Postman CLI
+      - name: Ejecutar pruebas con Postman CLI en paralelo
         id: run_tests
         continue-on-error: true
         run: |
           ENVIRONMENT_ID="19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a"
-          
-          while IFS= read -r collection_id; do
-            echo "Ejecutando pruebas para la colección: $collection_id"
-            postman collection run "$collection_id" --environment "$ENVIRONMENT_ID" --reporters junit --reporter-junit-export "report-${collection_id}.xml"
-          done < collections.txt
+          API_KEY="PMAK-67d3651b7dc2730001805eff-dfc938e9fff7540d831de3bec4259f0e63"
+
+          cat collections.txt | xargs -I {} -P 4 sh -c '
+            echo "Ejecutando pruebas para la colección: {}"
+            postman collection run "{}" \
+              --environment "$ENVIRONMENT_ID" \
+              --api-key "$API_KEY" \
+              --reporters junit \
+              --reporter-junit-export "report-{}.xml" \
+            || echo "Falló la colección {}"
+          '
 
       - name: Publicar Reporte de Pruebas
         uses: mikepenz/action-junit-report@v3
