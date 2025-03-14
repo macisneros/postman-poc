@@ -47,7 +47,6 @@ jobs:
             postman collection run "{}" \
               --environment "19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a" \
               --verbose \
-              --timeout 15000 \
               --reporters junit \
               --reporter-junit-export "report-{}.xml" \
             || echo "Falló la colección {}"
