@@ -15,20 +15,16 @@ jobs:
 
     steps:
 
-      - name: Instalar Newman
-        run: npm install -g newman
-
-      - name: Descargar colección de Postman
+      - name: Instalar Postman CLI
         run: |
-          curl --silent --request GET \
-            --url "https://api.getpostman.com/collections/ada46968-73f0-4c27-ba1f-e5022ef1de1c" \
-            --header "X-Api-Key: PMAK-67d3651b7dc2730001805eff-dfc938e9fff7540d831de3bec4259f0e63" > postman_collection.json
+          curl -o- https://dl-cli.pstmn.io/install/linux64.sh | sh
 
-      - name: Descargar ambiente de Postman
+      - name: Autenticarse con Postman API
+        run: postman login --with-api-key PMAK-67d3651b7dc2730001805eff-dfc938e9fff7540d831de3bec4259f0e63
+
+      - name: Ejecutar pruebas con Postman CLI
+        id: run_tests
+        continue-on-error: true
         run: |
-          curl --silent --request GET \
-            --url "https://api.getpostman.com/environments/19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a" \
-            --header "X-Api-Key: PMAK-67d3651b7dc2730001805eff-dfc938e9fff7540d831de3bec4259f0e63" > postman_environment.json
-
-      - name: Ejecutar pruebas de Smoke con Newman
-        run: newman run postman_collection.json -e postman_environment.json --reporters cli,junit --reporter-junit-export results.xml
+          postman collection run ada46968-73f0-4c27-ba1f-e5022ef1de1c \
+            --environment-id 19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a
