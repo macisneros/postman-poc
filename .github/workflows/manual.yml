@@ -42,12 +42,10 @@ jobs:
         id: run_tests
         continue-on-error: true
         run: |
-          ENVIRONMENT_ID="c63c8089-ea3f-4b19-ac50-57ace60da05a"
-
           cat collections.txt | xargs -I {} -P 4 sh -c '
             echo "Ejecutando pruebas para la colección: {}"
             postman collection run "{}" \
-              --environment "$ENVIRONMENT_ID" \
+              --environment "19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a" \
               --verbose \
               --timeout 15000 \
               --reporters junit \
