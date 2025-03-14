@@ -27,4 +27,4 @@ jobs:
         continue-on-error: true
         run: |
           postman collection run ada46968-73f0-4c27-ba1f-e5022ef1de1c \
-            --environment-id 19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a
+            --environment 19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a
