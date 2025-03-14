@@ -30,7 +30,7 @@ jobs:
             --url "https://api.getpostman.com/collections?workspace=487ad635-93e0-4c25-b39e-20c6db7908b0" \
             --header "X-Api-Key: $API_KEY")
 
-          echo "$COLLECTIONS_JSON" | jq -r '.collections[] | select(.name | test("^Auto|^Monitor") == true) | .uid' > collections.txt
+          echo "$COLLECTIONS_JSON" | jq -r '.collections[] | select(.name | test("^Auto\\|Monitor")) | .uid' > collections.txt
 
           echo "Colecciones filtradas:"
           cat collections.txt
