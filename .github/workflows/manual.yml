@@ -48,6 +48,7 @@ jobs:
             echo "Ejecutando pruebas para la colección: {}"
             postman collection run "{}" \
               --environment "$ENVIRONMENT_ID" \
+              --verbose \
               --reporters junit \
               --reporter-junit-export "report-{}.xml" \
             || echo "Falló la colección {}"
