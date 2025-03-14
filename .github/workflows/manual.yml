@@ -31,12 +31,10 @@ jobs:
         id: run_tests
         continue-on-error: true
         run: |
-          for collection_id in "8ff5d78b-c9de-4590-bd82-1e64689d81cc" "ada46968-73f0-4c27-ba1f-e5022ef1de1c"; do
-            postman collection run "$collection_id" \
-              --environment 19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a \
-              --reporters junit \
-              --reporter-junit-export "report-${collection_id}.xml"
-          done
+          postman collection run ${{ matrix.collection_id }} \
+             --environment 19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a \
+             --reporters junit \
+             --reporter-junit-export report-${{ matrix.collection_id }}.xml
             
       - name: Publicar Reporte de Pruebas
         uses: mikepenz/action-junit-report@v3
