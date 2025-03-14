@@ -15,7 +15,9 @@ jobs:
     
     strategy:
       matrix:
-        collection: [8ff5d78b-c9de-4590-bd82-1e64689d81cc,ada46968-73f0-4c27-ba1f-e5022ef1de1c]
+        collection_id: 
+          - "8ff5d78b-c9de-4590-bd82-1e64689d81cc"
+          - "ada46968-73f0-4c27-ba1f-e5022ef1de1c"
 
     steps:
 
