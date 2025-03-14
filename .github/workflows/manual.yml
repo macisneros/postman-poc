@@ -49,6 +49,7 @@ jobs:
             postman collection run "{}" \
               --environment "$ENVIRONMENT_ID" \
               --verbose \
+              --timeout 15000 \
               --reporters junit \
               --reporter-junit-export "report-{}.xml" \
             || echo "Falló la colección {}"
