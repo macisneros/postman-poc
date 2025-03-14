@@ -12,11 +12,6 @@ on:
 jobs:
   postman-tests:
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        collection_id: 
-          - "ada46968-73f0-4c27-ba1f-e5022ef1de1c"
 
     steps:
       - name: Instalar Postman CLI
