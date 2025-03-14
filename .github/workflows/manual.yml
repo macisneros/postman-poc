@@ -27,7 +27,7 @@ jobs:
         run: |
           API_KEY="PMAK-67d3651b7dc2730001805eff-dfc938e9fff7540d831de3bec4259f0e63"
           COLLECTIONS_JSON=$(curl --silent --request GET \
-            --url "https://api.getpostman.com/collections" \
+            --url "https://api.getpostman.com/collections?workspace=487ad635-93e0-4c25-b39e-20c6db7908b0" \
             --header "X-Api-Key: $API_KEY")
 
           echo "$COLLECTIONS_JSON" | jq -r '.collections[] | select(.name | test("^(Auto|Monitor)")) | .id' > collections.txt
