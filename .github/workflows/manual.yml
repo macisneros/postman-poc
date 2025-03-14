@@ -20,8 +20,7 @@ jobs:
     steps:
 
       - name: Instalar Postman CLI
-        run: |
-          curl -o- https://dl-cli.pstmn.io/install/linux64.sh | sh
+        run: npm install -g @postman/cli
 
       - name: Autenticarse con Postman API
         run: postman login --with-api-key PMAK-67d3651b7dc2730001805eff-dfc938e9fff7540d831de3bec4259f0e63
