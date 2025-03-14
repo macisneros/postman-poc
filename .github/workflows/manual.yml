@@ -31,10 +31,10 @@ jobs:
         id: run_tests
         continue-on-error: true
         run: |
-          postman collection run ${{ matrix.collection }} \
+          postman collection run ${{ matrix.collection_id }} \
             --environment 19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a \
             --reporters junit \
-            --reporter-junit-export report-${{ matrix.collection }}.xml
+            --reporter-junit-export report-${{ matrix.collection_id }}.xml
 
             
       - name: Publicar Reporte de Pruebas
