@@ -46,10 +46,7 @@ jobs:
           
           while IFS= read -r collection_id; do
             echo "Ejecutando pruebas para la colección: $collection_id"
-            postman collection run "$collection_id" \
-              --environment "$ENVIRONMENT_ID" \
-              --reporters junit \
-              --reporter-junit-export "report-${collection_id}.xml"
+            postman collection run "$collection_id" --environment "$ENVIRONMENT_ID" --reporters junit --reporter-junit-export "report-${collection_id}.xml"
           done < collections.txt
 
       - name: Publicar Reporte de Pruebas
