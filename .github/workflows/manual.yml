@@ -12,6 +12,10 @@ on:
 jobs:
   postman-tests:
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        collection: [ece35bd1-e995-4471-b160-3fcb0bfd4962, ada46968-73f0-4c27-ba1f-e5022ef1de1c]
 
     steps:
 
@@ -26,5 +30,13 @@ jobs:
         id: run_tests
         continue-on-error: true
         run: |
-          postman collection run ada46968-73f0-4c27-ba1f-e5022ef1de1c \
-            --environment 19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a
+          postman collection run ${{ matrix.collection }} \
+            --environment 19150850-c63c8089-ea3f-4b19-ac50-57ace60da05a \
+            --reporters junit \
+            --reporter-junit-export report-${{ matrix.collection }}.xml
+
+            
+      - name: Publicar Reporte de Pruebas
+        uses: mikepenz/action-junit-report@v3
+        with:
+          report_paths: "report-*.xml"
